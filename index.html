@@ -143,7 +143,7 @@
   <span class="chip">Seine Marathon 76</span>
   <div class="when"><b>Dimanche 27 septembre</b>Rouen, départ 8h30</div>
 </header>
-<h1>Où voir Simon<span>Le plan des supporters, et des amis qui courent un bout. Glissez la règle en bas d'écran pour faire avancer Simon sur la carte.</span></h1>
+<h1>Où voir Simon<span>Le plan des supporters, et des amis qui courent un bout. Glissez la règle en bas d'écran pour faire avancer Simon sur la&nbsp;carte.</span></h1>
 
 <section class="tile map" id="mapTile" aria-label="Carte">
   <svg class="m" id="map" viewBox="-20 -20 1000 1048" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tracé du marathon sur fond de Seine, avec le point de base des supporters">
@@ -170,11 +170,11 @@
   </div>
 </section>
 
-<h1 class="sec">Les horaires<span>Tout ce qui suit se recalcule avec l'allure.</span></h1>
+<h1 class="sec">Les horaires<span>Tout ce qui suit se recalcule avec&nbsp;l'allure.</span></h1>
 
 <section class="tile glow glow-pink pace" aria-label="Allure">
   <h2 style="text-align:center">Allure de Simon</h2>
-  <p class="lead" style="text-align:center">Glissez la règle. Les horaires suivent, avec la valeur à +15 s/km en petit.</p>
+  <p class="lead" style="text-align:center">Glissez la règle. Les horaires suivent, avec la valeur à +15 s/km en&nbsp;petit.</p>
   <div class="big"><span class="val dot" id="paceOut">4:45</span><span class="unit">min / km</span></div>
   <div class="ruler" id="rulerBox">
     <input type="range" id="paceRange" min="270" max="315" step="5" value="285" aria-label="Allure au kilomètre, de 4:30 à 5:15">
@@ -188,22 +188,22 @@
 
 <section class="tile glow glow-sage" aria-label="Point de base">
   <h2>Point de base · pont Boieldieu, côté Cours Clémenceau</h2>
-  <p class="lead">Rive gauche, au pied du pont, devant le Département. Le départ, le semi et l'arrivée passent exactement là. Six passages sans bouger, la cathédrale à cinq minutes à pied.</p>
+  <p class="lead">Rive gauche, au pied du pont, devant le Département. Le départ, le semi et l'arrivée passent exactement là. Six passages sans bouger, la cathédrale à cinq minutes à&nbsp;pied.</p>
   <ul class="pass" id="hubList"></ul>
   <h2 style="margin-top:18px">À deux minutes à pied</h2>
-  <p class="lead">Quatre passages de plus en traversant le pont vers le quai de la Bourse, ou 300 m vers l'ouest.</p>
+  <p class="lead">Quatre passages de plus en traversant le pont vers le quai de la Bourse, ou 300 m vers&nbsp;l'ouest.</p>
   <ul class="pass" id="nearList"></ul>
 </section>
 
 <section class="tile glow glow-blue" aria-label="Spot bonus">
   <h2>Spot bonus · avenue de Bretagne, centre Saint-Sever</h2>
-  <p class="lead">Neuf minutes à pied vers le sud-ouest. Le parcours y passe quatre fois, dont le km 36 : le moment où un visage connu compte le plus.</p>
+  <p class="lead">Neuf minutes à pied vers le sud-ouest. Le parcours y passe quatre fois, dont le km 36 : le moment où un visage connu compte le&nbsp;plus.</p>
   <ul class="pass" id="secondList"></ul>
 </section>
 
 <section class="tile" aria-label="Déroulé">
   <h2>Déroulé conseillé</h2>
-  <p class="lead">Pour voir tous les passages sans courir soi-même.</p>
+  <p class="lead">Pour voir tous les passages sans courir&nbsp;soi-même.</p>
   <ol class="plan" id="plan"></ol>
 </section>
 
@@ -218,12 +218,12 @@
 </section>
 
 <section aria-label="Segments amis">
-  <h1 class="sec">Courir un bout avec Simon<span>Trois segments du point de base au point de base. Touchez-en un pour le voir en grand sur la carte.</span></h1>
+  <h1 class="sec">Courir un bout avec Simon<span>Trois segments du point de base au point de base. Touchez-en un pour le voir en grand sur la&nbsp;carte.</span></h1>
   <div class="segs" id="segs"></div>
-  <p class="segnote">À vérifier dans le règlement : la plupart des marathons interdisent les accompagnants sans dossard sur la chaussée. Courir sur le trottoir à hauteur de Simon reste possible sur les quais et les avenues.</p>
+  <p class="segnote">À vérifier dans le règlement : la plupart des marathons interdisent les accompagnants sans dossard sur la chaussée. Courir sur le trottoir à hauteur de Simon reste possible sur les quais et les&nbsp;avenues.</p>
 </section>
 
-<p class="foot">Distances calculées sur la trace GPX officielle (42,2 km), précision d'environ 100 m. Ajoutez 5 à 10 minutes de marge après le km 30 pour être sûrs d'être en place.</p>
+<p class="foot">Distances calculées sur la trace GPX officielle (42,2 km), précision d'environ 100 m. Ajoutez 5 à 10 minutes de marge après le km 30 pour être sûrs d'être en&nbsp;place.</p>
 </div>
 
 <div class="bar" role="region" aria-label="Suivre Simon sur la carte">
@@ -266,6 +266,7 @@ const NAMES=[[0,"Départ, Cours Clémenceau"],[1,"Hôtel de Ville"],[2,"Rue Jean
 let pace=285, active=-1, curKm=0, zoomed=false;
 const $=id=>document.getElementById(id);
 const pad=n=>String(n).padStart(2,"0");
+const noOrphan=s=>s.replace(/ ([^ ]*)$/," $1");
 const fmtPace=s=>Math.floor(s/60)+":"+pad(s%60);
 const clock=(km,p)=>{const t=START+Math.round(km*p);return Math.floor(t/3600)+"h"+pad(Math.floor(t%3600/60));};
 const fmtKm=k=>k>=TOTAL?"42,2":(Number.isInteger(k)?String(k):k.toFixed(1)).replace(".",",");
@@ -370,7 +371,7 @@ function drawRuler(){
   s+=`<line x1="${x}" y1="18" x2="${x}" y2="52" stroke="#D7F26B" stroke-width="3" stroke-linecap="round"/><rect x="${x-9}" y="44" width="18" height="12" rx="6" fill="#D7F26B"/>`;
   $("ruler").innerHTML=s;
 }
-const passRow=p=>`<li><span class="km dot">${fmtKm(p.km)}<small>km</small></span><span class="where">${p.where}</span><span class="t"><b class="dot">${clock(p.km,pace)}</b><s>${clock(p.km,pace+15)}</s></span></li>`;
+const passRow=p=>`<li><span class="km dot">${fmtKm(p.km)}<small>km</small></span><span class="where">${noOrphan(p.where)}</span><span class="t"><b class="dot">${clock(p.km,pace)}</b><s>${clock(p.km,pace+15)}</s></span></li>`;
 const mini=(s)=>{const [ax,ay]=posAt(s.from),[bx,by]=posAt(s.to);
   return `<svg class="mini" viewBox="30 20 920 980" role="img" aria-label="Tronçon du km ${fmtKm(s.from)} au km ${fmtKm(s.to)} sur la carte"><path d="M-30.5,37.5 L61.0,46.9 L152.4,53.9 L289.5,75.0 L426.7,135.9 L559.2,185.1 L629.3,196.8 L678.1,203.9" fill="none" stroke="#2A4558" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"/><path d="M678.1,203.9 L708.6,241.4 L792.4,304.6 L883.8,386.6 L960.0,456.9" fill="none" stroke="#2A4558" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/><path d="M678.1,203.9 L731.4,206.2 L838.1,253.1 L929.5,332.7 L1005.7,398.4" fill="none" stroke="#2A4558" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/><path d="${FULL}" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="5" stroke-linejoin="round"/><path d="${pathBetween(s.from,s.to)}" fill="none" stroke="#D7F26B" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${ax}" cy="${ay}" r="22" fill="#0E0F10" stroke="#D7F26B" stroke-width="8"/><circle cx="${bx}" cy="${by}" r="22" fill="#D7F26B" stroke="#0E0F10" stroke-width="6"/></svg>`;};
 
@@ -382,11 +383,11 @@ function render(){
   $("nearList").innerHTML=NEAR.map(passRow).join("");
   $("secondList").innerHTML=SECOND.map(passRow).join("");
   const plan=[[0,"Départ","Cours Clémenceau, pied du pont Boieldieu"],[0.2,"Pont Boieldieu","Simon passe devant vous vers la rive droite"],[2.3,"Quai de la Bourse","traverser le pont, 2 min"],[3.7,"Quai de la Bourse","repasse devant vous, puis file sur le pont Corneille"],[15.9,"Avenue de Bretagne","9 min de marche, le temps d'un café avant"],[21.1,"Semi, pont Boieldieu","retour au point de base, 9 min"],[24.6,"Pont Corneille","250 m à l'est"],[36.5,"Avenue de Bretagne","le km 36 : encouragements utiles"],[TOTAL,"Arrivée","Cours Clémenceau, puis déjeuner"]];
-  $("plan").innerHTML=plan.map(p=>`<li><span class="t dot">${clock(p[0],pace)}</span><span>${p[1]}<span class="d">${p[2]}</span></span></li>`).join("");
+  $("plan").innerHTML=plan.map(p=>`<li><span class="t dot">${clock(p[0],pace)}</span><span>${p[1]}<span class="d">${noOrphan(p[2])}</span></span></li>`).join("");
   $("segs").innerHTML=SEGS.map((s,i)=>`<button type="button" class="seg" data-i="${i}" aria-pressed="${i===active}">${mini(s)}<span>
       <span class="name">${s.name}</span>
       <span class="dist dot" style="display:block">${(s.to-s.from).toFixed(1).replace(".",",")}<small>km</small></span>
-      <span class="meta">Rejoindre au km ${fmtKm(s.from)} vers <b>${clock(s.from,pace)}</b>, retour vers <b>${clock(s.to,pace)}</b>. ${s.desc}.</span></span>
+      <span class="meta">Rejoindre au km ${fmtKm(s.from)} vers <b>${clock(s.from,pace)}</b>, retour vers <b>${clock(s.to,pace)}</b>. ${noOrphan(s.desc)}.</span></span>
     </button>`).join("");
   $("thPace").textContent="à "+fmtPace(pace); $("thSlow").textContent="à "+fmtPace(pace+15);
   const rows=[];for(let k=1;k<=42;k++)rows.push(k);rows.push(TOTAL);

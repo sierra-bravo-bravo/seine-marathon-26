@@ -14,6 +14,8 @@
     --r:26px;
   }
   *{box-sizing:border-box}
+  .icon{width:1.1em;height:1.1em;display:inline-block;vertical-align:-.18em;margin-inline-end:.32em;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .icon.sm{width:1em;height:1em}
   html{-webkit-text-size-adjust:100%;background:var(--bg);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:"Manrope",system-ui,-apple-system,sans-serif;font-size:15.5px;line-height:1.45}
   .wrap{max-width:560px;margin:0 auto;padding:18px 14px calc(150px + env(safe-area-inset-bottom))}
@@ -40,7 +42,7 @@
   .map{padding:10px 8px 12px;cursor:zoom-in}
   .map.z{cursor:zoom-out}
   svg.m{width:100%;height:auto;display:block;touch-action:pan-y}
-  .maphint{position:absolute;top:12px;right:14px;font:inherit;font-size:13px;font-weight:600;color:var(--ink);background:rgba(14,15,16,.7);border:1px solid rgba(255,255,255,.25);padding:0 14px;min-height:44px;border-radius:999px;cursor:pointer;transition-property:transform,background-color;transition-duration:150ms;transition-timing-function:ease-out}
+  .maphint{position:absolute;top:12px;right:14px;display:inline-flex;align-items:center;font:inherit;font-size:13px;font-weight:600;color:var(--ink);background:rgba(14,15,16,.7);border:1px solid rgba(255,255,255,.25);padding:0 14px;min-height:44px;border-radius:999px;cursor:pointer;transition-property:transform,background-color;transition-duration:150ms;transition-timing-function:ease-out}
   .maphint:hover{background:rgba(14,15,16,.85)}
   .maphint:active{transform:scale(.96)}
   .maphint:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
@@ -64,7 +66,7 @@
   .pace .row .arr{font-size:13.5px}
   .pace .row .arr b{font-weight:700}
   .steps{display:flex;gap:6px}
-  .steps button{position:relative;appearance:none;border:0;background:rgba(255,255,255,.18);color:#fff;font:inherit;font-size:20px;width:40px;height:40px;border-radius:50%;cursor:pointer;transition-property:transform,background-color;transition-duration:150ms;transition-timing-function:ease-out}
+  .steps button{position:relative;display:inline-flex;align-items:center;justify-content:center;appearance:none;border:0;background:rgba(255,255,255,.18);color:#fff;font:inherit;font-size:20px;width:40px;height:40px;border-radius:50%;cursor:pointer;transition-property:transform,background-color;transition-duration:150ms;transition-timing-function:ease-out}
   .steps button::after{content:"";position:absolute;top:50%;left:50%;width:44px;height:44px;transform:translate(-50%,-50%)}
   .steps button:hover{background:rgba(255,255,255,.26)}
   .steps button:active{transform:scale(.96)}
@@ -137,11 +139,28 @@
 </style>
 </head>
 <body>
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+  <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-footprints" viewBox="0 0 24 24"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></symbol>
+  <symbol id="i-list-checks" viewBox="0 0 24 24"><path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/></symbol>
+  <symbol id="i-table" viewBox="0 0 24 24"><path d="M3 9h18"/><path d="M9 3v18"/><rect x="3" y="3" width="18" height="18" rx="2"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></symbol>
+  <symbol id="i-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-zoom-in" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="14"/><line x1="8" x2="14" y1="11" y2="11"/></symbol>
+  <symbol id="i-zoom-out" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="8" x2="14" y1="11" y2="11"/></symbol>
+</svg>
 <div class="wrap">
 
 <header>
   <span class="chip">Seine Marathon 76</span>
-  <div class="when"><b>Dimanche 27 septembre</b>Rouen, départ 8h30</div>
+  <div class="when"><b><svg class="icon sm"><use href="#i-calendar"/></svg>Dimanche 27 septembre</b>Rouen, départ 8h30</div>
 </header>
 <h1>Où voir Simon<span>Le plan des supporters, et des amis qui courent un bout. Glissez la règle en bas d'écran pour faire avancer Simon sur la&nbsp;carte.</span></h1>
 
@@ -164,16 +183,16 @@
     <g id="spots"></g>
     <g id="cursor"><circle r="34" fill="var(--lime)" opacity=".5" filter="url(#glow)"/><circle r="12" fill="var(--lime)" stroke="#0E0F10" stroke-width="4"/><text x="20" y="-18" font-size="26" font-weight="700" fill="var(--lime)" font-family="Manrope">Simon</text></g>
   </svg>
-  <button type="button" class="maphint" id="maphint" aria-pressed="false">Zoomer</button>
+  <button type="button" class="maphint" id="maphint" aria-pressed="false"><svg class="icon sm" style="margin-inline-end:.25em"><use href="#i-zoom-in"/></svg>Zoomer</button>
   <div class="legend">
     <span><i class="w"></i>Seine</span><span><i></i>parcours</span><span><i class="c"></i>Simon</span><span><i class="h"></i>point de base</span><span><i class="s"></i>spot bonus</span>
   </div>
 </section>
 
-<h1 class="sec">Les horaires<span>Tout ce qui suit se recalcule avec&nbsp;l'allure.</span></h1>
+<h1 class="sec"><svg class="icon"><use href="#i-clock"/></svg>Les horaires<span>Tout ce qui suit se recalcule avec&nbsp;l'allure.</span></h1>
 
 <section class="tile glow glow-pink pace" aria-label="Allure">
-  <h2 style="text-align:center">Allure de Simon</h2>
+  <h2 style="text-align:center"><svg class="icon"><use href="#i-gauge"/></svg>Allure de Simon</h2>
   <p class="lead" style="text-align:center">Glissez la règle. Les horaires suivent, avec la valeur à +15 s/km en&nbsp;petit.</p>
   <div class="big"><span class="val dot" id="paceOut">4:45</span><span class="unit">min / km</span></div>
   <div class="ruler" id="rulerBox">
@@ -182,34 +201,34 @@
   </div>
   <div class="row">
     <div class="arr">Arrivée estimée <b id="arriveOut"></b></div>
-    <div class="steps"><button type="button" id="paceDown" aria-label="Plus rapide">−</button><button type="button" id="paceUp" aria-label="Plus lent">+</button></div>
+    <div class="steps"><button type="button" id="paceDown" aria-label="Plus rapide"><svg class="icon" style="margin:0"><use href="#i-minus"/></svg></button><button type="button" id="paceUp" aria-label="Plus lent"><svg class="icon" style="margin:0"><use href="#i-plus"/></svg></button></div>
   </div>
 </section>
 
 <section class="tile glow glow-sage" aria-label="Point de base">
-  <h2>Point de base · pont Boieldieu, côté Cours Clémenceau</h2>
+  <h2><svg class="icon"><use href="#i-map-pin"/></svg>Point de base · pont Boieldieu, côté Cours Clémenceau</h2>
   <p class="lead">Rive gauche, au pied du pont, devant le Département. Le départ, le semi et l'arrivée passent exactement là. Six passages sans bouger, la cathédrale à cinq minutes à&nbsp;pied.</p>
   <ul class="pass" id="hubList"></ul>
-  <h2 style="margin-top:18px">À deux minutes à pied</h2>
+  <h2 style="margin-top:18px"><svg class="icon"><use href="#i-footprints"/></svg>À deux minutes à pied</h2>
   <p class="lead">Quatre passages de plus en traversant le pont vers le quai de la Bourse, ou 300 m vers&nbsp;l'ouest.</p>
   <ul class="pass" id="nearList"></ul>
 </section>
 
 <section class="tile glow glow-blue" aria-label="Spot bonus">
-  <h2>Spot bonus · avenue de Bretagne, centre Saint-Sever</h2>
+  <h2><svg class="icon"><use href="#i-star"/></svg>Spot bonus · avenue de Bretagne, centre Saint-Sever</h2>
   <p class="lead">Neuf minutes à pied vers le sud-ouest. Le parcours y passe quatre fois, dont le km 36 : le moment où un visage connu compte le&nbsp;plus.</p>
   <ul class="pass" id="secondList"></ul>
 </section>
 
 <section class="tile" aria-label="Déroulé">
-  <h2>Déroulé conseillé</h2>
+  <h2><svg class="icon"><use href="#i-list-checks"/></svg>Déroulé conseillé</h2>
   <p class="lead">Pour voir tous les passages sans courir&nbsp;soi-même.</p>
   <ol class="plan" id="plan"></ol>
 </section>
 
 <section class="tile" aria-label="Tableau">
   <details>
-    <summary>Kilomètre par kilomètre</summary>
+    <summary><span><svg class="icon"><use href="#i-table"/></svg>Kilomètre par kilomètre</span></summary>
     <table>
       <thead><tr><th>km</th><th>Où</th><th id="thPace">à 4:45</th><th id="thSlow">à 5:00</th></tr></thead>
       <tbody id="kmTable"></tbody>
@@ -218,12 +237,12 @@
 </section>
 
 <section aria-label="Segments amis">
-  <h1 class="sec">Courir un bout avec Simon<span>Trois segments du point de base au point de base. Touchez-en un pour le voir en grand sur la&nbsp;carte.</span></h1>
+  <h1 class="sec"><svg class="icon"><use href="#i-users"/></svg>Courir un bout avec Simon<span>Trois segments du point de base au point de base. Touchez-en un pour le voir en grand sur la&nbsp;carte.</span></h1>
   <div class="segs" id="segs"></div>
-  <p class="segnote">À vérifier dans le règlement : la plupart des marathons interdisent les accompagnants sans dossard sur la chaussée. Courir sur le trottoir à hauteur de Simon reste possible sur les quais et les&nbsp;avenues.</p>
+  <p class="segnote"><svg class="icon sm"><use href="#i-triangle-alert"/></svg>À vérifier dans le règlement : la plupart des marathons interdisent les accompagnants sans dossard sur la chaussée. Courir sur le trottoir à hauteur de Simon reste possible sur les quais et les&nbsp;avenues.</p>
 </section>
 
-<p class="foot">Distances calculées sur la trace GPX officielle (42,2 km), précision d'environ 100 m. Ajoutez 5 à 10 minutes de marge après le km 30 pour être sûrs d'être en&nbsp;place.</p>
+<p class="foot"><svg class="icon sm"><use href="#i-info"/></svg>Distances calculées sur la trace GPX officielle (42,2 km), précision d'environ 100 m. Ajoutez 5 à 10 minutes de marge après le km 30 pour être sûrs d'être en&nbsp;place.</p>
 </div>
 
 <div class="bar" role="region" aria-label="Suivre Simon sur la carte">
@@ -320,7 +339,9 @@ function animateView(){
   raf=requestAnimationFrame(step);
 }
 function setZoom(z){
-  zoomed=z; $("mapTile").classList.toggle("z",z); $("maphint").textContent=z?"Tout voir":"Zoomer"; $("maphint").setAttribute("aria-pressed",z);
+  zoomed=z; $("mapTile").classList.toggle("z",z);
+  $("maphint").innerHTML=`<svg class="icon sm" style="margin-inline-end:.25em"><use href="#i-${z?"zoom-out":"zoom-in"}"/></svg>${z?"Tout voir":"Zoomer"}`;
+  $("maphint").setAttribute("aria-pressed",z);
   $("kms").style.display=z?"":"" ; animateView();
 }
 $("map").addEventListener("click",()=>setZoom(!zoomed));

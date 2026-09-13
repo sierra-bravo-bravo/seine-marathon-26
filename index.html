@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0F0A17">
+<meta name="theme-color" content="#000000">
 <title>Seine Marathon 76 · plan supporters</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Doto:wght@600;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0F0A17; --tile:#1B1424; --ink:#F5F1FA; --mute:rgba(245,241,250,.62); --line:rgba(223,207,237,.12);
-    --lime:#FFF266; --sage:#C4B8DA; --pink:#8B3FE0; --blue:#DFCFED; --clay:#262626; --water:#1E3F55; --water2:#2C5A76;
+    --bg:#000000; --tile:#141414; --ink:#FFFFFF; --mute:rgba(255,255,255,.6); --line:rgba(255,255,255,.12);
+    --lime:#FFFF00; --sage:#999999; --pink:#FFFF00; --blue:#CCCCCC; --clay:#666666; --water:#1E3F55; --water2:#2C5A76;
     --r:26px;
   }
   *{box-sizing:border-box}
@@ -31,9 +31,9 @@
 
   .tile{position:relative;border-radius:var(--r);background:var(--tile);padding:20px 20px 18px;margin:16px 0;overflow:hidden;isolation:isolate}
   .glow{color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.35)}
-  .glow-pink{background:radial-gradient(closest-side at 50% 50%, #231B06 0%, #6B5518 45%, #C9A83A 75%, #FFF266 100%)}
-  .glow-sage{background:radial-gradient(closest-side at 50% 50%, #0D0714 0%, #371157 50%, #8B3FE0 100%)}
-  .glow-blue{background:radial-gradient(closest-side at 50% 50%, #170F26 0%, #5B4A78 55%, #DFCFED 100%)}
+  .glow-pink{background:radial-gradient(closest-side at 50% 50%, #000000 0%, #4D4D00 45%, #999900 75%, #FFFF00 100%)}
+  .glow-sage{background:radial-gradient(closest-side at 50% 50%, #000000 0%, #2B2B2B 50%, #666666 100%)}
+  .glow-blue{background:radial-gradient(closest-side at 50% 50%, #0D0D0D 0%, #4D4D4D 55%, #CCCCCC 100%)}
   .tile h2{margin:0 0 4px;font-size:17px;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
   .tile .lead{margin:0 0 12px;font-size:13.5px;color:var(--mute);text-wrap:pretty}
   .glow .lead{color:rgba(255,255,255,.8)}
@@ -94,9 +94,9 @@
   .segs{display:grid;grid-template-columns:1fr;gap:10px}
   .seg{appearance:none;width:100%;text-align:left;font:inherit;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.35);border:0;border-radius:22px;padding:14px;cursor:pointer;display:grid;grid-template-columns:38% 1fr;gap:14px;align-items:center;position:relative;overflow:hidden;transition-property:transform,box-shadow;transition-duration:150ms;transition-timing-function:ease-out}
   .seg:active{transform:scale(.96)}
-  .seg:nth-child(1){background:radial-gradient(90% 70% at 30% 20%, #190F26 0%, #4A2170 55%, #7C3FE0 120%)}
-  .seg:nth-child(2){background:radial-gradient(90% 70% at 70% 25%, #241D06 0%, #7A6318 60%, #FFF266 125%)}
-  .seg:nth-child(3){background:radial-gradient(60% 120% at 50% 50%, #170F26 0%, #5B4A78 60%, #DFCFED 130%)}
+  .seg:nth-child(1){background:radial-gradient(90% 70% at 30% 20%, #000000 0%, #4D4D00 55%, #FFFF00 120%)}
+  .seg:nth-child(2){background:radial-gradient(90% 70% at 70% 25%, #000000 0%, #333333 60%, #666666 125%)}
+  .seg:nth-child(3){background:radial-gradient(60% 120% at 50% 50%, #0D0D0D 0%, #4D4D4D 60%, #CCCCCC 130%)}
   @media (max-width:359px){.seg{grid-template-columns:1fr}}
   .seg:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
   .seg[aria-pressed="true"]{box-shadow:inset 0 0 0 2.5px var(--lime)}

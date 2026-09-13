@@ -10,7 +10,7 @@
 <style>
   :root{
     --bg:#E8E8E6; --tile:#FFFFFF; --ink:#161616; --mute:rgba(22,22,22,.55); --line:rgba(0,0,0,.08);
-    --lime:#D6FF3C; --sage:#9A9A9A; --pink:#F2478F; --blue:#4F86D9; --clay:#F08A2E; --water:#CDD9E3; --water2:#A3B9CA;
+    --lime:#D6FF3C; --sage:#9A9A9A; --pink:#F2478F; --clay:#F08A2E; --water:#CDD9E3; --water2:#A3B9CA;
     --r:28px;
   }
   *{box-sizing:border-box}
@@ -33,7 +33,6 @@
   .glow{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.22)}
   .glow-pink{background:radial-gradient(80% 60% at 12% 0%, #F7B26B 0%, rgba(247,178,107,0) 70%),radial-gradient(90% 80% at 90% 100%, #1E9A3E 0%, rgba(30,154,62,0) 70%),linear-gradient(175deg, #F2C39A 0%, #8CC66A 55%, #3AA94A 100%)}
   .glow-sage{background:radial-gradient(70% 70% at 8% 0%, #C6D7EC 0%, rgba(198,215,236,0) 65%),radial-gradient(85% 85% at 92% 96%, #F07A16 0%, rgba(240,122,22,0) 70%),linear-gradient(160deg, #CFDAE8 0%, #EBA86A 58%, #F0842A 100%)}
-  .glow-blue{background:radial-gradient(farthest-corner at 22% 18%, #FF2E85 0%, #FF66A6 55%, #FF94C0 100%)}
   .tile h2{margin:0 0 4px;font-size:17px;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
   .tile .lead{margin:0 0 12px;font-size:13.5px;color:var(--mute);text-wrap:pretty}
   .glow .lead{color:rgba(255,255,255,.85)}
@@ -52,7 +51,6 @@
   .legend span{display:inline-flex;align-items:center;gap:6px}
   .legend i{display:inline-block;width:14px;height:0;border-top:3px solid var(--sage);border-radius:2px}
   .legend i.h{width:11px;height:11px;border:0;border-radius:50%;background:var(--pink);box-shadow:0 0 8px var(--pink)}
-  .legend i.s{width:11px;height:11px;border:2px solid var(--blue);border-radius:50%}
   .legend i.c{width:11px;height:11px;border:2px solid var(--ink);border-radius:50%;background:var(--lime)}
   .legend i.w{width:14px;height:8px;border:0;border-radius:3px;background:var(--water2)}
 
@@ -63,7 +61,6 @@
   .ruler{position:relative;height:64px;margin:12px 0 4px;touch-action:none;cursor:ew-resize;border-radius:10px}
   .ruler svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
   .ruler input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;pointer-events:none}
-  .ruler:focus-within{outline:2px solid #fff;outline-offset:4px}
   .pace .row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:8px}
   .pace .row .arr{font-size:13.5px}
   .pace .row .arr b{font-weight:700}
@@ -120,7 +117,6 @@
   td:nth-child(3),td:nth-child(4){font-size:17px;white-space:nowrap}
   td:nth-child(4){color:var(--mute)}
   tr.hub td:first-child{color:var(--pink)}
-  tr.second td:first-child{color:var(--blue)}
   .foot{margin:22px 8px 0;font-size:12.5px;color:var(--mute);text-wrap:pretty}
 
   /* bottom scrubber */
@@ -136,7 +132,6 @@
   .scrub{position:relative;height:56px;touch-action:none;cursor:ew-resize;border-radius:10px}
   .scrub svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
   .scrub input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;pointer-events:none}
-  .scrub:focus-within{outline:2px solid var(--ink);outline-offset:2px}
   @media (prefers-reduced-motion:no-preference){ .seghl{transition:opacity .3s} }
 </style>
 </head>
@@ -147,7 +142,6 @@
   <symbol id="i-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
   <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
   <symbol id="i-footprints" viewBox="0 0 24 24"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></symbol>
-  <symbol id="i-star" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></symbol>
   <symbol id="i-list-checks" viewBox="0 0 24 24"><path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/></symbol>
   <symbol id="i-table" viewBox="0 0 24 24"><path d="M3 9h18"/><path d="M9 3v18"/><rect x="3" y="3" width="18" height="18" rx="2"/></symbol>
   <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></symbol>
@@ -187,7 +181,7 @@
   </svg>
   <button type="button" class="maphint" id="maphint" aria-pressed="false"><svg class="icon sm" style="margin-inline-end:.25em"><use href="#i-zoom-in"/></svg>Zoomer</button>
   <div class="legend">
-    <span><i class="w"></i>Seine</span><span><i></i>parcours</span><span><i class="c"></i>Simon</span><span><i class="h"></i>point de base</span><span><i class="s"></i>spot bonus</span>
+    <span><i class="w"></i>Seine</span><span><i></i>parcours</span><span><i class="c"></i>Simon</span><span><i class="h"></i>point de base</span>
   </div>
 </section>
 
@@ -216,11 +210,6 @@
   <ul class="pass" id="nearList"></ul>
 </section>
 
-<section class="tile glow glow-blue" aria-label="Spot bonus">
-  <h2><svg class="icon"><use href="#i-star"/></svg>Spot bonus · avenue de Bretagne, centre Saint-Sever</h2>
-  <p class="lead">Neuf minutes à pied vers le sud-ouest. Le parcours y passe quatre fois, dont le km 36 : le moment où un visage connu compte le&nbsp;plus.</p>
-  <ul class="pass" id="secondList"></ul>
-</section>
 
 <section class="tile" aria-label="Déroulé">
   <h2><svg class="icon"><use href="#i-list-checks"/></svg>Déroulé conseillé</h2>
@@ -277,7 +266,6 @@ const NEAR=[
   {km:16.6,where:"Quai de la Bourse, en traversant le pont"},
   {km:20.9,where:"Quai de la Bourse, juste avant le semi"},
   {km:37.0,where:"Pont Jeanne d'Arc côté sud, 300 m à l'ouest"}];
-const SECOND=[{km:5.2,where:"Aller de la première boucle sud"},{km:15.9,where:"Retour de la première boucle sud"},{km:25.7,where:"Aller de la boucle finale"},{km:36.5,where:"Retour de la boucle finale, le km 36"}];
 const SEGS=[
   {name:"Boucle sud",from:4.0,to:16.6,desc:"Prise au pont Corneille, Jardin des Plantes, Champ des Bruyères, retour quai de la Bourse"},
   {name:"Boucle finale",from:24.6,to:TOTAL,desc:"Prise au pont Corneille, même boucle sud puis quais de l'ouest jusqu'à l'arrivée"},
@@ -309,11 +297,9 @@ let kmHtml="";
 for(let k=2;k<42;k+=2){const [x,y]=posAt(k);kmHtml+=`<circle cx="${x}" cy="${y}" r="6" fill="var(--ink)"/><text x="${x+11}" y="${y+8}" font-size="22" font-weight="700" fill="var(--ink)" font-family="Manrope">${k}</text>`;}
 $("kms").innerHTML=kmHtml;
 (function(){
-  const [hx,hy]=[621.7,215.6],[sx,sy]=[495.2,314.0],[cx,cy]=[672.0,206.2];
+  const [hx,hy]=[621.7,215.6],[cx,cy]=[672.0,206.2];
   $("spots").innerHTML=
-   `<circle cx="${sx}" cy="${sy}" r="15" fill="#fff" stroke="var(--blue)" stroke-width="5"/>
-    <text x="${sx-90}" y="${sy+62}" font-size="26" fill="var(--blue)" font-weight="600" font-family="Manrope">spot bonus</text>
-    <circle cx="${hx}" cy="${hy}" r="44" fill="var(--pink)" opacity=".55" filter="url(#glow)"/>
+   `<circle cx="${hx}" cy="${hy}" r="44" fill="var(--pink)" opacity=".55" filter="url(#glow)"/>
     <circle cx="${hx}" cy="${hy}" r="15" fill="var(--pink)" stroke="#fff" stroke-width="4"/>
     <circle cx="${cx}" cy="${cy}" r="10" fill="none" stroke="var(--pink)" stroke-width="4"/>
     <text x="${hx-90}" y="${hy+72}" font-size="30" fill="var(--pink)" font-weight="700" font-family="Manrope">point de base</text>`;
@@ -364,7 +350,6 @@ function drawScrub(){
     s+=`<line x1="${x}" y1="${maj?12:18}" x2="${x}" y2="${maj?36:30}" stroke="rgba(0,0,0,${maj?.6:.22})" stroke-width="${maj?1.6:1}"/>`;
     if(maj&&i>0)s+=`<text x="${x}" y="9" font-size="8" fill="rgba(0,0,0,.5)" text-anchor="middle" font-family="Manrope" font-weight="600">${i}</text>`;}
   [...HUB,...NEAR].forEach(h=>{const x=p+(W-2*p)*h.km/TOTAL;s+=`<circle cx="${x}" cy="24" r="3" fill="var(--pink)"><title>Point de base, km ${fmtKm(h.km)}</title></circle>`;});
-  SECOND.forEach(h=>{const x=p+(W-2*p)*h.km/TOTAL;s+=`<circle cx="${x}" cy="24" r="2.6" fill="none" stroke="var(--blue)" stroke-width="1.4"/>`;});
   const x=p+(W-2*p)*curKm/TOTAL;
   s+=`<line x1="${x}" y1="4" x2="${x}" y2="42" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/><rect x="${x-9}" y="30" width="18" height="12" rx="6" fill="var(--lime)" stroke="var(--ink)" stroke-width="1.5"/>`;
   $("scrubSvg").innerHTML=s;
@@ -376,7 +361,7 @@ function scrubber(box,input,padFrac,apply){
     let t=(e.clientX-r.left-p)/(r.width-2*p); t=Math.min(1,Math.max(0,t));
     const min=+input.min,max=+input.max,step=+input.step;
     apply(Math.round((min+t*(max-min))/step)*step);};
-  box.addEventListener("pointerdown",e=>{if(e.button&&e.button!==0)return;box.setPointerCapture(e.pointerId);input.focus({preventScroll:true});move(e);e.preventDefault();});
+  box.addEventListener("pointerdown",e=>{if(e.button&&e.button!==0)return;box.setPointerCapture(e.pointerId);move(e);e.preventDefault();});
   box.addEventListener("pointermove",e=>{if(box.hasPointerCapture&&box.hasPointerCapture(e.pointerId))move(e);});
 }
 scrubber($("scrubBox"),$("kmRange"),10/320,v=>{curKm=Math.min(TOTAL,v);$("kmRange").value=curKm;updateCursor();});
@@ -404,8 +389,7 @@ function render(){
   drawRuler();
   $("hubList").innerHTML=HUB.map(passRow).join("");
   $("nearList").innerHTML=NEAR.map(passRow).join("");
-  $("secondList").innerHTML=SECOND.map(passRow).join("");
-  const plan=[[0,"Départ","Cours Clémenceau, pied du pont Boieldieu"],[0.2,"Pont Boieldieu","Simon passe devant vous vers la rive droite"],[2.3,"Quai de la Bourse","traverser le pont, 2 min"],[3.7,"Quai de la Bourse","repasse devant vous, puis file sur le pont Corneille"],[15.9,"Avenue de Bretagne","9 min de marche, le temps d'un café avant"],[21.1,"Semi, pont Boieldieu","retour au point de base, 9 min"],[24.6,"Pont Corneille","250 m à l'est"],[36.5,"Avenue de Bretagne","le km 36 : encouragements utiles"],[TOTAL,"Arrivée","Cours Clémenceau, puis déjeuner"]];
+  const plan=[[0,"Départ","Cours Clémenceau, pied du pont Boieldieu"],[0.2,"Pont Boieldieu","Simon passe devant vous vers la rive droite"],[2.3,"Quai de la Bourse","traverser le pont, 2 min"],[3.7,"Quai de la Bourse","repasse devant vous, puis file sur le pont Corneille"],[21.1,"Semi, pont Boieldieu","sous vos yeux, au point de base"],[24.6,"Pont Corneille","250 m à l'est"],[TOTAL,"Arrivée","Cours Clémenceau, puis déjeuner"]];
   $("plan").innerHTML=plan.map(p=>`<li><span class="t dot">${clock(p[0],pace)}</span><span>${p[1]}<span class="d">${noOrphan(p[2])}</span></span></li>`).join("");
   $("segs").innerHTML=SEGS.map((s,i)=>`<button type="button" class="seg" data-i="${i}" aria-pressed="${i===active}">${mini(s)}<span>
       <span class="name">${s.name}</span>
@@ -415,8 +399,8 @@ function render(){
   $("thPace").textContent="à "+fmtPace(pace); $("thSlow").textContent="à "+fmtPace(pace+15);
   const rows=[];for(let k=1;k<=42;k++)rows.push(k);rows.push(TOTAL);
   $("kmTable").innerHTML=rows.map(k=>{
-    const isHub=HUB.some(h=>Math.abs(h.km-k)<0.5&&h.km>0), isSec=SECOND.some(h=>Math.abs(h.km-k)<0.5);
-    return `<tr class="${isHub?"hub":isSec?"second":""}"><td class="dot">${fmtKm(k)}</td><td>${kmLabel(k)}</td><td class="dot">${clock(k,pace)}</td><td class="dot">${clock(k,pace+15)}</td></tr>`;}).join("");
+    const isHub=HUB.some(h=>Math.abs(h.km-k)<0.5&&h.km>0);
+    return `<tr class="${isHub?"hub":""}"><td class="dot">${fmtKm(k)}</td><td>${kmLabel(k)}</td><td class="dot">${clock(k,pace)}</td><td class="dot">${clock(k,pace+15)}</td></tr>`;}).join("");
   drawSeg(); updateCursor();
 }
 function drawSeg(){

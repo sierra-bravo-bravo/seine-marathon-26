@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0E0F10">
+<meta name="theme-color" content="#0F0A17">
 <title>Seine Marathon 76 · plan supporters</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Doto:wght@600;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0E0F10; --tile:#171A1C; --ink:#F2F3F0; --mute:rgba(242,243,240,.62); --line:rgba(255,255,255,.10);
-    --lime:#D7F26B; --sage:#B9D4C2; --pink:#E98BBF; --blue:#7E9CF0; --clay:#D07C5A; --water:#1E3F55; --water2:#2C5A76;
+    --bg:#0F0A17; --tile:#1B1424; --ink:#F5F1FA; --mute:rgba(245,241,250,.62); --line:rgba(223,207,237,.12);
+    --lime:#FFF266; --sage:#C4B8DA; --pink:#8B3FE0; --blue:#DFCFED; --clay:#262626; --water:#1E3F55; --water2:#2C5A76;
     --r:26px;
   }
   *{box-sizing:border-box}
@@ -31,9 +31,9 @@
 
   .tile{position:relative;border-radius:var(--r);background:var(--tile);padding:20px 20px 18px;margin:16px 0;overflow:hidden;isolation:isolate}
   .glow{color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.35)}
-  .glow-pink{background:radial-gradient(closest-side at 50% 50%, #26081F 0%, #7E2358 45%, #A9427F 75%, #B85A93 100%)}
-  .glow-sage{background:radial-gradient(closest-side at 50% 50%, #0B1512 0%, #22392F 50%, #476E58 100%)}
-  .glow-blue{background:radial-gradient(closest-side at 50% 50%, #0A1130 0%, #1F3A8F 55%, #4664BE 100%)}
+  .glow-pink{background:radial-gradient(closest-side at 50% 50%, #231B06 0%, #6B5518 45%, #C9A83A 75%, #FFF266 100%)}
+  .glow-sage{background:radial-gradient(closest-side at 50% 50%, #0D0714 0%, #371157 50%, #8B3FE0 100%)}
+  .glow-blue{background:radial-gradient(closest-side at 50% 50%, #170F26 0%, #5B4A78 55%, #DFCFED 100%)}
   .tile h2{margin:0 0 4px;font-size:17px;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
   .tile .lead{margin:0 0 12px;font-size:13.5px;color:var(--mute);text-wrap:pretty}
   .glow .lead{color:rgba(255,255,255,.8)}
@@ -94,9 +94,9 @@
   .segs{display:grid;grid-template-columns:1fr;gap:10px}
   .seg{appearance:none;width:100%;text-align:left;font:inherit;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.35);border:0;border-radius:22px;padding:14px;cursor:pointer;display:grid;grid-template-columns:38% 1fr;gap:14px;align-items:center;position:relative;overflow:hidden;transition-property:transform,box-shadow;transition-duration:150ms;transition-timing-function:ease-out}
   .seg:active{transform:scale(.96)}
-  .seg:nth-child(1){background:radial-gradient(90% 70% at 30% 20%, #142219 0%, #2E5A44 55%, #4E8266 120%)}
-  .seg:nth-child(2){background:radial-gradient(90% 70% at 70% 25%, #2A1109 0%, #8B4126 60%, #B0603E 125%)}
-  .seg:nth-child(3){background:radial-gradient(60% 120% at 50% 50%, #0A1130 0%, #1F3A8F 60%, #4664BE 130%)}
+  .seg:nth-child(1){background:radial-gradient(90% 70% at 30% 20%, #190F26 0%, #4A2170 55%, #7C3FE0 120%)}
+  .seg:nth-child(2){background:radial-gradient(90% 70% at 70% 25%, #241D06 0%, #7A6318 60%, #FFF266 125%)}
+  .seg:nth-child(3){background:radial-gradient(60% 120% at 50% 50%, #170F26 0%, #5B4A78 60%, #DFCFED 130%)}
   @media (max-width:359px){.seg{grid-template-columns:1fr}}
   .seg:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
   .seg[aria-pressed="true"]{box-shadow:inset 0 0 0 2.5px var(--lime)}
@@ -182,7 +182,7 @@
     <path id="seghl" class="seghl" fill="none" stroke="var(--lime)" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" opacity="0"/>
     <g id="kms"></g>
     <g id="spots"></g>
-    <g id="cursor"><circle r="34" fill="var(--lime)" opacity=".5" filter="url(#glow)"/><circle r="12" fill="var(--lime)" stroke="#0E0F10" stroke-width="4"/><text x="20" y="-18" font-size="26" font-weight="700" fill="var(--lime)" font-family="Manrope">Simon</text></g>
+    <g id="cursor"><circle r="34" fill="var(--lime)" opacity=".5" filter="url(#glow)"/><circle r="12" fill="var(--lime)" stroke="var(--bg)" stroke-width="4"/><text x="20" y="-18" font-size="26" font-weight="700" fill="var(--lime)" font-family="Manrope">Simon</text></g>
   </svg>
   <button type="button" class="maphint" id="maphint" aria-pressed="false"><svg class="icon sm" style="margin-inline-end:.25em"><use href="#i-zoom-in"/></svg>Zoomer</button>
   <div class="legend">
@@ -305,17 +305,17 @@ const FULL=pathBetween(0,TOTAL);
 $("route").setAttribute("d",FULL);
 $("bridges").innerHTML=BRIDGES.map(b=>`<line x1="${b[1]}" y1="${b[2]-14}" x2="${b[1]}" y2="${b[2]+14}" stroke="#9FB8C8" stroke-width="3" stroke-linecap="round"/><text x="${b[1]}" y="${b[2]+(b[3]<0?-26:40)}" font-size="15" fill="#9FB8C8" font-family="Manrope" text-anchor="middle">${b[0]}</text>`).join("");
 let kmHtml="";
-for(let k=2;k<42;k+=2){const [x,y]=posAt(k);kmHtml+=`<circle cx="${x}" cy="${y}" r="6" fill="#F2F3F0"/><text x="${x+11}" y="${y+8}" font-size="22" font-weight="700" fill="#F2F3F0" font-family="Manrope">${k}</text>`;}
+for(let k=2;k<42;k+=2){const [x,y]=posAt(k);kmHtml+=`<circle cx="${x}" cy="${y}" r="6" fill="var(--ink)"/><text x="${x+11}" y="${y+8}" font-size="22" font-weight="700" fill="var(--ink)" font-family="Manrope">${k}</text>`;}
 $("kms").innerHTML=kmHtml;
 (function(){
   const [hx,hy]=[621.7,215.6],[sx,sy]=[495.2,314.0],[cx,cy]=[672.0,206.2];
   $("spots").innerHTML=
-   `<circle cx="${sx}" cy="${sy}" r="15" fill="#0E0F10" stroke="#7E9CF0" stroke-width="5"/>
-    <text x="${sx-90}" y="${sy+62}" font-size="26" fill="#7E9CF0" font-weight="600" font-family="Manrope">spot bonus</text>
-    <circle cx="${hx}" cy="${hy}" r="44" fill="#E98BBF" opacity=".55" filter="url(#glow)"/>
-    <circle cx="${hx}" cy="${hy}" r="15" fill="#E98BBF" stroke="#0E0F10" stroke-width="4"/>
-    <circle cx="${cx}" cy="${cy}" r="10" fill="none" stroke="#E98BBF" stroke-width="4"/>
-    <text x="${hx-90}" y="${hy+72}" font-size="30" fill="#E98BBF" font-weight="700" font-family="Manrope">point de base</text>`;
+   `<circle cx="${sx}" cy="${sy}" r="15" fill="var(--bg)" stroke="var(--blue)" stroke-width="5"/>
+    <text x="${sx-90}" y="${sy+62}" font-size="26" fill="var(--blue)" font-weight="600" font-family="Manrope">spot bonus</text>
+    <circle cx="${hx}" cy="${hy}" r="44" fill="var(--pink)" opacity=".55" filter="url(#glow)"/>
+    <circle cx="${hx}" cy="${hy}" r="15" fill="var(--pink)" stroke="var(--bg)" stroke-width="4"/>
+    <circle cx="${cx}" cy="${cy}" r="10" fill="none" stroke="var(--pink)" stroke-width="4"/>
+    <text x="${hx-90}" y="${hy+72}" font-size="30" fill="var(--pink)" font-weight="700" font-family="Manrope">point de base</text>`;
 })();
 
 // zoom: viewBox follows the cursor when zoomed
@@ -362,10 +362,10 @@ function drawScrub(){
   for(let i=0;i<=n;i++){const x=p+(W-2*p)*i/TOTAL, maj=i%5===0;
     s+=`<line x1="${x}" y1="${maj?12:18}" x2="${x}" y2="${maj?36:30}" stroke="rgba(255,255,255,${maj?.75:.35})" stroke-width="${maj?1.6:1}"/>`;
     if(maj&&i>0)s+=`<text x="${x}" y="9" font-size="8" fill="rgba(255,255,255,.6)" text-anchor="middle" font-family="Manrope" font-weight="600">${i}</text>`;}
-  [...HUB,...NEAR].forEach(h=>{const x=p+(W-2*p)*h.km/TOTAL;s+=`<circle cx="${x}" cy="24" r="3" fill="#E98BBF"><title>Point de base, km ${fmtKm(h.km)}</title></circle>`;});
-  SECOND.forEach(h=>{const x=p+(W-2*p)*h.km/TOTAL;s+=`<circle cx="${x}" cy="24" r="2.6" fill="none" stroke="#7E9CF0" stroke-width="1.4"/>`;});
+  [...HUB,...NEAR].forEach(h=>{const x=p+(W-2*p)*h.km/TOTAL;s+=`<circle cx="${x}" cy="24" r="3" fill="var(--pink)"><title>Point de base, km ${fmtKm(h.km)}</title></circle>`;});
+  SECOND.forEach(h=>{const x=p+(W-2*p)*h.km/TOTAL;s+=`<circle cx="${x}" cy="24" r="2.6" fill="none" stroke="var(--blue)" stroke-width="1.4"/>`;});
   const x=p+(W-2*p)*curKm/TOTAL;
-  s+=`<line x1="${x}" y1="4" x2="${x}" y2="42" stroke="#D7F26B" stroke-width="3" stroke-linecap="round"/><rect x="${x-9}" y="30" width="18" height="12" rx="6" fill="#D7F26B"/>`;
+  s+=`<line x1="${x}" y1="4" x2="${x}" y2="42" stroke="var(--lime)" stroke-width="3" stroke-linecap="round"/><rect x="${x-9}" y="30" width="18" height="12" rx="6" fill="var(--lime)"/>`;
   $("scrubSvg").innerHTML=s;
 }
 $("kmRange").addEventListener("input",e=>{curKm=+e.target.value;updateCursor();});
@@ -390,12 +390,12 @@ function drawRuler(){
     if(major&&(i/5)%3===0)s+=`<text x="${x}" y="12" font-size="9" fill="#fff" text-anchor="middle" font-family="Manrope" font-weight="600">${fmtPace(270+i)}</text>`;
   }
   const x=p+(W-2*p)*(pace-270)/45;
-  s+=`<line x1="${x}" y1="18" x2="${x}" y2="52" stroke="#D7F26B" stroke-width="3" stroke-linecap="round"/><rect x="${x-9}" y="44" width="18" height="12" rx="6" fill="#D7F26B"/>`;
+  s+=`<line x1="${x}" y1="18" x2="${x}" y2="52" stroke="var(--lime)" stroke-width="3" stroke-linecap="round"/><rect x="${x-9}" y="44" width="18" height="12" rx="6" fill="var(--lime)"/>`;
   $("ruler").innerHTML=s;
 }
 const passRow=p=>`<li><span class="km dot">${fmtKm(p.km)}<small>km</small></span><span class="where">${noOrphan(p.where)}</span><span class="t"><b class="dot">${clock(p.km,pace)}</b><s>${clock(p.km,pace+15)}</s></span></li>`;
 const mini=(s)=>{const [ax,ay]=posAt(s.from),[bx,by]=posAt(s.to);
-  return `<svg class="mini" viewBox="30 20 920 980" role="img" aria-label="Tronçon du km ${fmtKm(s.from)} au km ${fmtKm(s.to)} sur la carte"><path d="M-30.5,37.5 L61.0,46.9 L152.4,53.9 L289.5,75.0 L426.7,135.9 L559.2,185.1 L629.3,196.8 L678.1,203.9" fill="none" stroke="#2A4558" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"/><path d="M678.1,203.9 L708.6,241.4 L792.4,304.6 L883.8,386.6 L960.0,456.9" fill="none" stroke="#2A4558" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/><path d="M678.1,203.9 L731.4,206.2 L838.1,253.1 L929.5,332.7 L1005.7,398.4" fill="none" stroke="#2A4558" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/><path d="${FULL}" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="5" stroke-linejoin="round"/><path d="${pathBetween(s.from,s.to)}" fill="none" stroke="#D7F26B" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${ax}" cy="${ay}" r="22" fill="#0E0F10" stroke="#D7F26B" stroke-width="8"/><circle cx="${bx}" cy="${by}" r="22" fill="#D7F26B" stroke="#0E0F10" stroke-width="6"/></svg>`;};
+  return `<svg class="mini" viewBox="30 20 920 980" role="img" aria-label="Tronçon du km ${fmtKm(s.from)} au km ${fmtKm(s.to)} sur la carte"><path d="M-30.5,37.5 L61.0,46.9 L152.4,53.9 L289.5,75.0 L426.7,135.9 L559.2,185.1 L629.3,196.8 L678.1,203.9" fill="none" stroke="#2A4558" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"/><path d="M678.1,203.9 L708.6,241.4 L792.4,304.6 L883.8,386.6 L960.0,456.9" fill="none" stroke="#2A4558" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/><path d="M678.1,203.9 L731.4,206.2 L838.1,253.1 L929.5,332.7 L1005.7,398.4" fill="none" stroke="#2A4558" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/><path d="${FULL}" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="5" stroke-linejoin="round"/><path d="${pathBetween(s.from,s.to)}" fill="none" stroke="var(--lime)" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${ax}" cy="${ay}" r="22" fill="var(--bg)" stroke="var(--lime)" stroke-width="8"/><circle cx="${bx}" cy="${by}" r="22" fill="var(--lime)" stroke="var(--bg)" stroke-width="6"/></svg>`;};
 
 function render(){
   $("paceOut").textContent=fmtPace(pace); $("paceRange").value=pace;

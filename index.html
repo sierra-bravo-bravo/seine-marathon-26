@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E0F10">
+<title>Seine Marathon 76 · plan supporters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Doto:wght@600;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E0F10; --tile:#171A1C; --ink:#F2F3F0; --mute:rgba(242,243,240,.62); --line:rgba(255,255,255,.10);
+    --lime:#D7F26B; --sage:#B9D4C2; --pink:#E98BBF; --blue:#7E9CF0; --clay:#D07C5A; --water:#1E3F55; --water2:#2C5A76;
+    --r:26px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--bg)}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Manrope",system-ui,-apple-system,sans-serif;font-size:15.5px;line-height:1.45}
+  .wrap{max-width:560px;margin:0 auto;padding:18px 14px calc(150px + env(safe-area-inset-bottom))}
+  .dot{font-family:"Doto","Manrope",monospace;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+
+  header{display:flex;justify-content:space-between;align-items:center;padding:6px 6px 18px}
+  .chip{display:inline-block;border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:7px 14px;font-size:13px}
+  header .when{text-align:right;font-size:13px;color:var(--mute);line-height:1.25}
+  header .when b{display:block;color:var(--ink);font-size:15px;font-weight:600}
+  h1{margin:6px 6px 22px;font-size:34px;line-height:1.02;font-weight:600;letter-spacing:-.025em}
+  h1 span{display:block;color:var(--mute);font-size:16px;font-weight:500;letter-spacing:0;margin-top:8px}
+  h1.sec{font-size:26px;margin:30px 6px 14px}
+
+  .tile{position:relative;border-radius:var(--r);background:var(--tile);padding:20px 20px 18px;margin:10px 0;overflow:hidden;isolation:isolate}
+  .glow{color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.35)}
+  .glow-pink{background:radial-gradient(62% 58% at 50% 46%, #26081F 0%, #7E2358 42%, #A9427F 76%, #B85A93 100%)}
+  .glow-sage{background:radial-gradient(85% 75% at 50% 36%, #0B1512 0%, #22392F 48%, #476E58 100%)}
+  .glow-blue{background:radial-gradient(85% 75% at 50% 36%, #0A1130 0%, #1F3A8F 50%, #4664BE 100%)}
+  .tile h2{margin:0 0 4px;font-size:17px;font-weight:600;letter-spacing:-.01em}
+  .tile .lead{margin:0 0 12px;font-size:13.5px;color:var(--mute)}
+  .glow .lead{color:rgba(255,255,255,.8)}
+
+  /* map */
+  .map{padding:10px 8px 12px;cursor:zoom-in}
+  .map.z{cursor:zoom-out}
+  svg.m{width:100%;height:auto;display:block;touch-action:pan-y}
+  .maphint{position:absolute;top:12px;right:14px;font:inherit;font-size:13px;font-weight:600;color:var(--ink);background:rgba(14,15,16,.7);border:1px solid rgba(255,255,255,.25);padding:0 14px;min-height:36px;border-radius:999px;cursor:pointer}
+  .maphint:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--mute);padding:6px 10px 2px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{display:inline-block;width:14px;height:0;border-top:3px solid var(--sage);border-radius:2px}
+  .legend i.h{width:11px;height:11px;border:0;border-radius:50%;background:var(--pink);box-shadow:0 0 8px var(--pink)}
+  .legend i.s{width:11px;height:11px;border:2px solid var(--blue);border-radius:50%}
+  .legend i.c{width:11px;height:11px;border:0;border-radius:50%;background:var(--lime);box-shadow:0 0 8px var(--lime)}
+  .legend i.w{width:14px;height:8px;border:0;border-radius:3px;background:var(--water2)}
+
+  /* pace tile */
+  .pace .big{text-align:center;margin:8px 0 0}
+  .pace .big .val{font-size:74px;line-height:1;display:block}
+  .pace .big .unit{display:block;font-size:14px;margin-top:2px}
+  .ruler{position:relative;height:64px;margin:12px 0 4px;touch-action:none;cursor:ew-resize;border-radius:10px}
+  .ruler svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .ruler input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;pointer-events:none}
+  .ruler:focus-within{outline:2px solid #fff;outline-offset:4px}
+  .pace .row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:8px}
+  .pace .row .arr{font-size:13.5px}
+  .pace .row .arr b{font-weight:700}
+  .steps{display:flex;gap:6px}
+  .steps button{appearance:none;border:0;background:rgba(255,255,255,.18);color:#fff;font:inherit;font-size:20px;width:40px;height:40px;border-radius:50%;cursor:pointer}
+  .steps button:focus-visible{outline:2px solid #fff}
+
+  /* passages */
+  ul.pass{list-style:none;margin:0;padding:0}
+  ul.pass li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:9px 0;border-top:1px solid rgba(255,255,255,.14)}
+  ul.pass li:first-child{border-top:0}
+  ul.pass .km{font-size:22px;line-height:1;min-width:64px}
+  ul.pass .km small{font-family:"Manrope";font-size:11px;font-weight:600;opacity:.75;display:block;letter-spacing:0}
+  ul.pass .where{font-size:13.5px;opacity:.85}
+  ul.pass .t{text-align:right;line-height:1}
+  ul.pass .t b{font-size:26px;display:block}
+  ul.pass .t s{text-decoration:none;font-family:"Manrope";font-weight:500;font-size:12px;opacity:.75}
+
+  ol.plan{margin:0;padding:0;list-style:none}
+  ol.plan li{display:grid;grid-template-columns:78px 1fr;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:14.5px}
+  ol.plan li:first-child{border-top:0}
+  ol.plan .t{font-size:24px;line-height:1.1;color:var(--lime)}
+  ol.plan .d{color:var(--mute);font-size:12.5px;display:block;margin-top:2px}
+
+  /* segments */
+  .segs{display:grid;grid-template-columns:1fr;gap:10px}
+  .seg{appearance:none;width:100%;text-align:left;font:inherit;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.35);border:0;border-radius:22px;padding:14px;cursor:pointer;display:grid;grid-template-columns:38% 1fr;gap:14px;align-items:center;position:relative;overflow:hidden}
+  .seg:nth-child(1){background:radial-gradient(90% 70% at 30% 20%, #142219 0%, #2E5A44 55%, #4E8266 120%)}
+  .seg:nth-child(2){background:radial-gradient(90% 70% at 70% 25%, #2A1109 0%, #8B4126 60%, #B0603E 125%)}
+  .seg:nth-child(3){background:radial-gradient(60% 120% at 50% 50%, #0A1130 0%, #1F3A8F 60%, #4664BE 130%)}
+  @media (max-width:359px){.seg{grid-template-columns:1fr}}
+  .seg:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+  .seg[aria-pressed="true"]{box-shadow:inset 0 0 0 2.5px var(--lime)}
+  svg.mini{width:100%;height:auto;display:block;border-radius:12px;background:rgba(0,0,0,.28)}
+  .seg .name{font-size:14px;font-weight:600}
+  .seg .dist{font-size:36px;line-height:1;margin:4px 0}
+  .seg .dist small{font-family:"Manrope";font-size:13px;font-weight:600;letter-spacing:0;margin-left:4px}
+  .seg .meta{font-size:12.5px;opacity:.85;line-height:1.35}
+  .seg .meta b{font-weight:700}
+  .segnote{font-size:12.5px;color:var(--mute);margin:12px 8px 0}
+
+  summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:15px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:22px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;font-weight:400}
+  details[open] summary::after{content:"–"}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:12px}
+  th{text-align:left;font-weight:500;color:var(--mute);font-size:12px;padding:8px 4px}
+  td{padding:7px 4px;border-top:1px solid var(--line)}
+  td:first-child{font-size:18px;width:60px}
+  td:nth-child(3),td:nth-child(4){font-size:17px;white-space:nowrap}
+  td:nth-child(4){color:var(--mute)}
+  tr.hub td:first-child{color:var(--pink)}
+  tr.second td:first-child{color:var(--blue)}
+  .foot{margin:22px 8px 0;font-size:12.5px;color:var(--mute)}
+
+  /* bottom scrubber */
+  .bar{position:fixed;left:0;right:0;bottom:0;padding:10px 14px calc(12px + env(safe-area-inset-bottom));background:rgba(14,15,16,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:5}
+  .bar .in{max-width:560px;margin:0 auto}
+  .bar .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:2px;flex-wrap:wrap}
+  .bar .lbl{font-size:12px;color:var(--mute)}
+  .bar .kmv{font-size:26px;line-height:1;color:var(--lime)}
+  .bar .kmv small{font-family:"Manrope";font-size:12px;font-weight:600;color:var(--mute);letter-spacing:0;margin-left:3px}
+  .bar .tv{font-size:26px;line-height:1;text-align:right}
+  .bar .tv small{display:block;font-family:"Manrope";font-size:11px;font-weight:500;color:var(--mute);letter-spacing:0;margin-top:2px}
+  .bar .where{font-size:12.5px;color:var(--mute);margin:4px 0 2px;min-height:17px}
+  .scrub{position:relative;height:56px;touch-action:none;cursor:ew-resize;border-radius:10px}
+  .scrub svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .scrub input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;pointer-events:none}
+  .scrub:focus-within{outline:2px solid var(--lime);outline-offset:2px}
+  @media (prefers-reduced-motion:no-preference){ .seghl{transition:opacity .3s} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="chip">Seine Marathon 76</span>
+  <div class="when"><b>Dimanche 27 septembre</b>Rouen, départ 8h30</div>
+</header>
+<h1>Où voir Simon<span>Le plan des supporters, et des amis qui courent un bout. Glissez la règle en bas d'écran pour faire avancer Simon sur la carte.</span></h1>
+
+<section class="tile map" id="mapTile" aria-label="Carte">
+  <svg class="m" id="map" viewBox="-20 -20 1000 1048" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tracé du marathon sur fond de Seine, avec le point de base des supporters">
+    <defs><filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16"/></filter></defs>
+    <g id="river">
+      <path d="M-30.5,37.5 L61.0,46.9 L152.4,53.9 L289.5,75.0 L426.7,135.9 L559.2,185.1 L629.3,196.8 L678.1,203.9" fill="none" stroke="var(--water)" stroke-width="52" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M678.1,203.9 L731.4,206.2 L838.1,253.1 L929.5,332.7 L1005.7,398.4" fill="none" stroke="var(--water)" stroke-width="30" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M678.1,203.9 L708.6,241.4 L792.4,304.6 L883.8,386.6 L960.0,456.9" fill="none" stroke="var(--water)" stroke-width="36" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M-30.5,37.5 L61.0,46.9 L152.4,53.9 L289.5,75.0 L426.7,135.9 L559.2,185.1 L629.3,196.8 L678.1,203.9" fill="none" stroke="var(--water2)" stroke-width="1.5" stroke-dasharray="2 12" stroke-linecap="round"/>
+      <path d="M693.3,210.9 L739.0,229.6 L815.2,281.2 L891.4,346.8 L906.7,374.9 L845.7,323.4 L769.5,262.4 L708.6,229.6 Z" fill="#1B2226" stroke="var(--water2)" stroke-width="1.5"/>
+      <text x="796" y="288" font-size="17" fill="#6F93A8" font-family="Manrope" font-style="italic" text-anchor="middle">île Lacroix</text>
+      <text x="120" y="60" font-size="26" fill="#6F93A8" font-family="Manrope" font-style="italic">la Seine</text>
+      <g id="bridges"></g>
+    </g>
+    <path id="route" fill="none" stroke="var(--sage)" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" stroke-linecap="round"/>
+    <path id="seghl" class="seghl" fill="none" stroke="var(--lime)" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" opacity="0"/>
+    <g id="kms"></g>
+    <g id="spots"></g>
+    <g id="cursor"><circle r="34" fill="var(--lime)" opacity=".5" filter="url(#glow)"/><circle r="12" fill="var(--lime)" stroke="#0E0F10" stroke-width="4"/><text x="20" y="-18" font-size="26" font-weight="700" fill="var(--lime)" font-family="Manrope">Simon</text></g>
+  </svg>
+  <button type="button" class="maphint" id="maphint" aria-pressed="false">Zoomer</button>
+  <div class="legend">
+    <span><i class="w"></i>Seine</span><span><i></i>parcours</span><span><i class="c"></i>Simon</span><span><i class="h"></i>point de base</span><span><i class="s"></i>spot bonus</span>
+  </div>
+</section>
+
+<h1 class="sec">Les horaires<span>Tout ce qui suit se recalcule avec l'allure.</span></h1>
+
+<section class="tile glow glow-pink pace" aria-label="Allure">
+  <h2 style="text-align:center">Allure de Simon</h2>
+  <p class="lead" style="text-align:center">Glissez la règle. Les horaires suivent, avec la valeur à +15 s/km en petit.</p>
+  <div class="big"><span class="val dot" id="paceOut">4:45</span><span class="unit">min / km</span></div>
+  <div class="ruler" id="rulerBox">
+    <input type="range" id="paceRange" min="270" max="315" step="5" value="285" aria-label="Allure au kilomètre, de 4:30 à 5:15">
+    <svg id="ruler" viewBox="0 0 320 56" preserveAspectRatio="none" aria-hidden="true"></svg>
+  </div>
+  <div class="row">
+    <div class="arr">Arrivée estimée <b id="arriveOut"></b></div>
+    <div class="steps"><button type="button" id="paceDown" aria-label="Plus rapide">−</button><button type="button" id="paceUp" aria-label="Plus lent">+</button></div>
+  </div>
+</section>
+
+<section class="tile glow glow-sage" aria-label="Point de base">
+  <h2>Point de base · pont Boieldieu, côté Cours Clémenceau</h2>
+  <p class="lead">Rive gauche, au pied du pont, devant le Département. Le départ, le semi et l'arrivée passent exactement là. Six passages sans bouger, la cathédrale à cinq minutes à pied.</p>
+  <ul class="pass" id="hubList"></ul>
+  <h2 style="margin-top:18px">À deux minutes à pied</h2>
+  <p class="lead">Quatre passages de plus en traversant le pont vers le quai de la Bourse, ou 300 m vers l'ouest.</p>
+  <ul class="pass" id="nearList"></ul>
+</section>
+
+<section class="tile glow glow-blue" aria-label="Spot bonus">
+  <h2>Spot bonus · avenue de Bretagne, centre Saint-Sever</h2>
+  <p class="lead">Neuf minutes à pied vers le sud-ouest. Le parcours y passe quatre fois, dont le km 36 : le moment où un visage connu compte le plus.</p>
+  <ul class="pass" id="secondList"></ul>
+</section>
+
+<section class="tile" aria-label="Déroulé">
+  <h2>Déroulé conseillé</h2>
+  <p class="lead">Pour voir tous les passages sans courir soi-même.</p>
+  <ol class="plan" id="plan"></ol>
+</section>
+
+<section class="tile" aria-label="Tableau">
+  <details>
+    <summary>Kilomètre par kilomètre</summary>
+    <table>
+      <thead><tr><th>km</th><th>Où</th><th id="thPace">à 4:45</th><th id="thSlow">à 5:00</th></tr></thead>
+      <tbody id="kmTable"></tbody>
+    </table>
+  </details>
+</section>
+
+<section aria-label="Segments amis">
+  <h1 class="sec">Courir un bout avec Simon<span>Trois segments du point de base au point de base. Touchez-en un pour le voir en grand sur la carte.</span></h1>
+  <div class="segs" id="segs"></div>
+  <p class="segnote">À vérifier dans le règlement : la plupart des marathons interdisent les accompagnants sans dossard sur la chaussée. Courir sur le trottoir à hauteur de Simon reste possible sur les quais et les avenues.</p>
+</section>
+
+<p class="foot">Distances calculées sur la trace GPX officielle (42,2 km), précision d'environ 100 m. Ajoutez 5 à 10 minutes de marge après le km 30 pour être sûrs d'être en place.</p>
+</div>
+
+<div class="bar" role="region" aria-label="Suivre Simon sur la carte">
+  <div class="in">
+    <div class="top">
+      <div><span class="lbl">Simon au</span> <span class="kmv dot" id="curKm">0,0<small>km</small></span></div>
+      <div class="tv dot" id="curT">8h30<small id="curT2">à l'allure choisie</small></div>
+    </div>
+    <div class="where" id="curWhere"></div>
+    <div class="scrub" id="scrubBox">
+      <input type="range" id="kmRange" min="0" max="42.195" step="0.1" value="0" aria-label="Position de Simon sur le parcours, en kilomètres">
+      <svg id="scrubSvg" viewBox="0 0 320 44" preserveAspectRatio="none" aria-hidden="true"></svg>
+    </div>
+  </div>
+</div>
+
+<script>
+const A=[[0.0,591.4,221.9],[0.21,608.9,181.8],[0.52,672.5,203.2],[1.11,709.3,82.5],[1.16,704.3,74.0],[1.24,706.7,57.6],[1.7,611.5,30.5],[2.37,559.2,162.6],[2.67,500.7,139.4],[2.86,465.2,117.9],[2.9,463.7,124.4],[3.12,505.9,148.6],[3.56,592.5,183.2],[3.6,601.0,184.4],[3.96,672.2,207.4],[4.1,663.6,237.8],[4.44,609.4,284.2],[4.47,604.0,286.1],[4.49,598.2,286.4],[4.53,590.3,282.8],[4.83,532.7,255.4],[4.88,524.2,260.8],[5.1,506.2,303.7],[5.2,493.9,322.0],[5.33,472.8,338.6],[5.66,408.1,364.4],[5.76,415.1,385.0],[5.86,427.0,402.1],[6.02,452.3,426.2],[6.09,463.5,433.7],[6.18,480.3,443.4],[6.77,427.0,558.4],[7.18,358.7,505.0],[7.35,333.9,531.0],[7.43,323.8,545.5],[7.66,301.1,586.5],[7.88,348.3,593.1],[8.14,398.5,617.9],[8.83,335.5,750.1],[9.09,386.0,774.2],[9.3,375.2,816.6],[9.54,369.5,867.5],[9.88,301.3,843.1],[9.92,298.4,849.7],[10.04,321.8,864.0],[10.19,349.6,879.4],[10.25,355.5,890.5],[10.58,351.1,960.8],[10.64,343.2,970.8],[10.71,330.2,973.6],[11.0,273.8,947.9],[11.06,266.7,938.0],[11.1,265.9,927.9],[11.46,297.9,860.0],[11.51,287.4,855.1],[12.03,240.3,954.2],[12.04,238.2,953.3],[12.56,286.5,854.4],[12.88,313.9,790.6],[14.12,232.7,541.3],[14.23,231.5,518.1],[14.7,279.6,429.5],[14.87,298.5,398.8],[14.9,303.8,401.4],[15.41,406.6,363.7],[15.43,405.6,359.2],[15.46,410.1,356.2],[15.48,414.0,358.1],[15.76,469.6,336.0],[15.9,493.0,318.0],[15.95,499.4,308.6],[16.69,558.5,162.4],[16.99,500.1,139.7],[17.18,465.4,117.4],[17.25,452.7,124.4],[17.29,444.6,123.7],[18.04,298.5,57.2],[18.21,266.1,45.9],[18.38,229.9,37.7],[18.55,194.4,34.0],[18.74,153.8,34.2],[18.74,153.9,35.1],[18.93,194.3,34.9],[19.1,230.4,38.7],[19.28,266.1,47.3],[19.44,298.2,58.1],[19.52,314.8,66.1],[20.56,514.6,158.2],[21.13,628.9,200.8],[21.72,748.6,236.9],[21.89,777.8,257.1],[22.79,886.6,415.2],[22.92,897.7,439.6],[22.93,899.8,439.8],[23.06,889.1,414.3],[23.85,794.2,275.8],[23.97,780.8,251.9],[24.14,750.0,233.4],[24.53,672.2,210.0],[24.67,663.5,238.8],[25.0,608.9,284.7],[25.03,604.2,285.9],[25.05,598.6,286.4],[25.1,590.0,282.6],[25.39,532.6,255.4],[25.44,523.9,260.6],[25.66,506.4,303.9],[25.77,493.7,322.2],[25.9,471.8,338.6],[26.22,407.9,364.6],[26.22,408.5,365.3],[26.32,415.4,384.3],[26.41,427.0,400.9],[26.58,452.4,426.0],[26.65,464.2,433.7],[26.74,480.3,443.4],[27.33,427.1,558.4],[27.74,358.9,505.2],[27.91,334.2,530.5],[27.99,324.0,545.3],[28.21,301.1,586.8],[28.44,348.3,593.3],[28.7,398.0,617.7],[28.7,398.0,618.2],[29.39,335.7,750.3],[29.65,386.1,774.5],[29.85,375.3,815.9],[30.1,369.5,867.3],[30.44,301.4,843.4],[30.47,298.5,849.9],[30.6,321.5,863.7],[30.75,349.9,879.4],[30.81,355.4,890.7],[31.14,350.9,961.0],[31.2,343.3,970.6],[31.26,330.4,973.6],[31.55,273.5,947.9],[31.61,266.8,938.3],[31.65,266.1,928.2],[32.01,297.3,860.2],[32.06,287.4,855.5],[32.57,240.3,954.2],[32.58,238.2,953.3],[33.1,286.0,855.1],[33.43,314.1,790.9],[34.66,232.1,541.8],[34.77,231.5,518.1],[35.25,279.9,429.5],[35.41,298.7,399.5],[35.44,304.2,401.6],[35.96,407.0,363.4],[35.98,405.9,359.5],[36.0,410.1,356.7],[36.02,414.0,358.5],[36.3,469.5,336.3],[36.44,492.8,318.0],[36.49,499.4,308.8],[37.0,539.3,209.0],[37.16,507.7,195.4],[37.29,487.5,178.3],[37.58,430.5,153.3],[37.63,419.2,149.3],[37.67,416.0,157.0],[38.38,275.0,104.5],[38.43,277.8,95.6],[38.55,252.8,86.2],[38.69,223.5,79.9],[38.74,215.6,86.9],[38.91,180.0,83.0],[39.03,153.4,83.4],[39.16,126.9,86.7],[39.26,105.8,90.7],[39.36,84.9,97.0],[39.47,62.6,102.6],[39.5,61.0,97.5],[39.6,82.1,89.5],[39.74,109.1,81.8],[39.86,135.0,77.1],[39.95,154.2,75.5],[40.1,185.4,74.5],[40.28,224.2,79.2],[40.42,253.3,85.3],[40.55,278.7,94.0],[41.33,434.3,152.5],[42.195,602.7,227.1]];
+const TOTAL=42.195, START=8*3600+30*60, VB=[-20,-20,1000,1048];
+const BRIDGES=[["Pont Flaubert", 297.1, 82.0, 0], ["Pont G. le Conquérant", 475.4, 154.7, -1], ["Pont Jeanne d'Arc", 559.2, 185.1, 1], ["Pont Boieldieu", 624.8, 196.8, -1], ["Pont Corneille", 679.6, 203.9, 1]];
+const HUB=[
+  {km:0,where:"Départ, sous vos yeux"},
+  {km:0.2,where:"Traversée du pont Boieldieu"},
+  {km:3.7,where:"Quai d'en face, puis pont Corneille"},
+  {km:21.1,where:"Semi, sur le pont Boieldieu"},
+  {km:24.6,where:"Pont Corneille, retour de l'île Lacroix"},
+  {km:TOTAL,where:"Arrivée"}];
+const NEAR=[
+  {km:2.3,where:"Quai de la Bourse, en traversant le pont"},
+  {km:16.6,where:"Quai de la Bourse, en traversant le pont"},
+  {km:20.9,where:"Quai de la Bourse, juste avant le semi"},
+  {km:37.0,where:"Pont Jeanne d'Arc côté sud, 300 m à l'ouest"}];
+const SECOND=[{km:5.2,where:"Aller de la première boucle sud"},{km:15.9,where:"Retour de la première boucle sud"},{km:25.7,where:"Aller de la boucle finale"},{km:36.5,where:"Retour de la boucle finale, le km 36"}];
+const SEGS=[
+  {name:"Boucle sud",from:4.0,to:16.6,desc:"Prise au pont Corneille, Jardin des Plantes, Champ des Bruyères, retour quai de la Bourse"},
+  {name:"Boucle finale",from:24.6,to:TOTAL,desc:"Prise au pont Corneille, même boucle sud puis quais de l'ouest jusqu'à l'arrivée"},
+  {name:"Le semi entier",from:21.1,to:TOTAL,desc:"Prise sur le pont Boieldieu : île Lacroix, boucle sud, quais, arrivée"}];
+const NAMES=[[0,"Départ, Cours Clémenceau"],[1,"Hôtel de Ville"],[2,"Rue Jeanne d'Arc"],[3,"Quai de la Bourse"],[4,"Pont Corneille"],[5,"Av. de Bretagne"],[6,"Secteur Saint-Sever sud"],[7,"Jardin des Plantes"],[8,"Av. des Canadiens"],[9,"Rue Madrillet"],[10,"Champ des Bruyères"],[11,"Champ des Bruyères"],[12,"Champ des Bruyères"],[13,"Bd du 11 Novembre"],[14,"Av. de la Libération"],[15,"Av. de Caen"],[16,"Av. de Bretagne, retour"],[17,"Quai du Havre"],[18,"Quai Gaston Boulet"],[19,"Demi-tour, retour quais"],[20,"Quai du Havre, retour"],[21,"Pont Boieldieu, semi"],[22,"Île Lacroix"],[23,"Demi-tour île Lacroix"],[24,"Quai de Paris"],[25,"Av. Champlain"],[26,"Av. de Bretagne"],[27,"Secteur Saint-Sever sud"],[28,"Jardin des Plantes"],[29,"Av. des Canadiens"],[30,"Rue Madrillet"],[31,"Champ des Bruyères"],[32,"Champ des Bruyères"],[33,"Bd du 11 Novembre"],[34,"Av. de la Libération"],[35,"Av. de Caen"],[36,"Av. de Bretagne, retour"],[37,"Pont Jeanne d'Arc, sud"],[38,"Allée F. Mitterrand"],[39,"Presqu'île Rollet"],[40,"Quai retour vers le centre"],[41,"Quai J. de Béthencourt"],[42,"Arrivée, Cours Clémenceau"]];
+
+let pace=285, active=-1, curKm=0, zoomed=false;
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,"0");
+const fmtPace=s=>Math.floor(s/60)+":"+pad(s%60);
+const clock=(km,p)=>{const t=START+Math.round(km*p);return Math.floor(t/3600)+"h"+pad(Math.floor(t%3600/60));};
+const fmtKm=k=>k>=TOTAL?"42,2":(Number.isInteger(k)?String(k):k.toFixed(1)).replace(".",",");
+function posAt(km){
+  for(let i=1;i<A.length;i++){ if(km<=A[i][0]){const a=A[i-1],b=A[i],f=(km-a[0])/(b[0]-a[0]);return[a[1]+(b[1]-a[1])*f,a[2]+(b[2]-a[2])*f];} }
+  return[A[A.length-1][1],A[A.length-1][2]];
+}
+function pathBetween(from,to){
+  const pts=[posAt(from)]; A.forEach(p=>{if(p[0]>from&&p[0]<to)pts.push([p[1],p[2]]);}); pts.push(posAt(to));
+  return pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(0)+","+p[1].toFixed(0)).join(" ");
+}
+const kmLabel=km=>{let b=NAMES[0];NAMES.forEach(n=>{if(Math.abs(n[0]-km)<Math.abs(b[0]-km))b=n;});return b[1];};
+const FULL=pathBetween(0,TOTAL);
+
+// ---- main map ----
+$("route").setAttribute("d",FULL);
+$("bridges").innerHTML=BRIDGES.map(b=>`<line x1="${b[1]}" y1="${b[2]-14}" x2="${b[1]}" y2="${b[2]+14}" stroke="#9FB8C8" stroke-width="3" stroke-linecap="round"/><text x="${b[1]}" y="${b[2]+(b[3]<0?-26:40)}" font-size="15" fill="#9FB8C8" font-family="Manrope" text-anchor="middle">${b[0]}</text>`).join("");
+let kmHtml="";
+for(let k=2;k<42;k+=2){const [x,y]=posAt(k);kmHtml+=`<circle cx="${x}" cy="${y}" r="6" fill="#F2F3F0"/><text x="${x+11}" y="${y+8}" font-size="22" font-weight="700" fill="#F2F3F0" font-family="Manrope">${k}</text>`;}
+$("kms").innerHTML=kmHtml;
+(function(){
+  const [hx,hy]=[621.7,215.6],[sx,sy]=[495.2,314.0],[cx,cy]=[672.0,206.2];
+  $("spots").innerHTML=
+   `<circle cx="${sx}" cy="${sy}" r="15" fill="#0E0F10" stroke="#7E9CF0" stroke-width="5"/>
+    <text x="${sx-90}" y="${sy+62}" font-size="26" fill="#7E9CF0" font-weight="600" font-family="Manrope">spot bonus</text>
+    <circle cx="${hx}" cy="${hy}" r="44" fill="#E98BBF" opacity=".55" filter="url(#glow)"/>
+    <circle cx="${hx}" cy="${hy}" r="15" fill="#E98BBF" stroke="#0E0F10" stroke-width="4"/>
+    <circle cx="${cx}" cy="${cy}" r="10" fill="none" stroke="#E98BBF" stroke-width="4"/>
+    <text x="${hx-90}" y="${hy+72}" font-size="30" fill="#E98BBF" font-weight="700" font-family="Manrope">point de base</text>`;
+})();
+
+// zoom: viewBox follows the cursor when zoomed
+let vbCur=VB.slice(), vbTarget=VB.slice(), raf=null;
+function targetView(){
+  if(!zoomed) return VB.slice();
+  const z=2.4, w=VB[2]/z, h=VB[3]/z, [x,y]=posAt(curKm);
+  const cx=Math.min(Math.max(x-w/2,VB[0]),VB[0]+VB[2]-w), cy=Math.min(Math.max(y-h/2,VB[1]),VB[1]+VB[3]-h);
+  return [cx,cy,w,h];
+}
+const REDUCED=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function animateView(){
+  vbTarget=targetView();
+  if(REDUCED){vbCur=vbTarget.slice();$("map").setAttribute("viewBox",vbCur.join(" "));return;}
+  if(raf) return;
+  const step=()=>{
+    let done=true;
+    vbCur=vbCur.map((v,i)=>{const d=vbTarget[i]-v; if(Math.abs(d)>.5){done=false;return v+d*.22;} return vbTarget[i];});
+    $("map").setAttribute("viewBox",vbCur.map(v=>v.toFixed(1)).join(" "));
+    if(!done) raf=requestAnimationFrame(step); else raf=null;
+  };
+  raf=requestAnimationFrame(step);
+}
+function setZoom(z){
+  zoomed=z; $("mapTile").classList.toggle("z",z); $("maphint").textContent=z?"Tout voir":"Zoomer"; $("maphint").setAttribute("aria-pressed",z);
+  $("kms").style.display=z?"":"" ; animateView();
+}
+$("map").addEventListener("click",()=>setZoom(!zoomed));
+$("maphint").addEventListener("click",e=>{e.stopPropagation();setZoom(!zoomed);});
+
+// cursor
+function updateCursor(){
+  const [x,y]=posAt(curKm);
+  $("cursor").setAttribute("transform",`translate(${x.toFixed(1)},${y.toFixed(1)})`);
+  $("curKm").innerHTML=fmtKm(curKm)+"<small>km</small>";
+  $("curT").innerHTML=clock(curKm,pace)+`<small>${clock(curKm,pace+15)} à +15 s/km</small>`;
+  $("curWhere").textContent=curKm>=TOTAL?"Arrivée, Cours Clémenceau":kmLabel(curKm);
+  drawScrub(); if(zoomed) animateView();
+}
+function drawScrub(){
+  const W=320,p=10,n=42;let s="";
+  for(let i=0;i<=n;i++){const x=p+(W-2*p)*i/TOTAL, maj=i%5===0;
+    s+=`<line x1="${x}" y1="${maj?12:18}" x2="${x}" y2="${maj?36:30}" stroke="rgba(255,255,255,${maj?.75:.35})" stroke-width="${maj?1.6:1}"/>`;
+    if(maj&&i>0)s+=`<text x="${x}" y="9" font-size="8" fill="rgba(255,255,255,.6)" text-anchor="middle" font-family="Manrope" font-weight="600">${i}</text>`;}
+  [...HUB,...NEAR].forEach(h=>{const x=p+(W-2*p)*h.km/TOTAL;s+=`<circle cx="${x}" cy="24" r="3" fill="#E98BBF"><title>Point de base, km ${fmtKm(h.km)}</title></circle>`;});
+  SECOND.forEach(h=>{const x=p+(W-2*p)*h.km/TOTAL;s+=`<circle cx="${x}" cy="24" r="2.6" fill="none" stroke="#7E9CF0" stroke-width="1.4"/>`;});
+  const x=p+(W-2*p)*curKm/TOTAL;
+  s+=`<line x1="${x}" y1="4" x2="${x}" y2="42" stroke="#D7F26B" stroke-width="3" stroke-linecap="round"/><rect x="${x-9}" y="30" width="18" height="12" rx="6" fill="#D7F26B"/>`;
+  $("scrubSvg").innerHTML=s;
+}
+$("kmRange").addEventListener("input",e=>{curKm=+e.target.value;updateCursor();});
+// Pointer scrubbing: the whole strip is the hit area (iOS only drags the native thumb itself).
+function scrubber(box,input,padFrac,apply){
+  const move=e=>{const r=box.getBoundingClientRect(),p=r.width*padFrac;
+    let t=(e.clientX-r.left-p)/(r.width-2*p); t=Math.min(1,Math.max(0,t));
+    const min=+input.min,max=+input.max,step=+input.step;
+    apply(Math.round((min+t*(max-min))/step)*step);};
+  box.addEventListener("pointerdown",e=>{if(e.button&&e.button!==0)return;box.setPointerCapture(e.pointerId);input.focus({preventScroll:true});move(e);e.preventDefault();});
+  box.addEventListener("pointermove",e=>{if(box.hasPointerCapture&&box.hasPointerCapture(e.pointerId))move(e);});
+}
+scrubber($("scrubBox"),$("kmRange"),10/320,v=>{curKm=Math.min(TOTAL,v);$("kmRange").value=curKm;updateCursor();});
+scrubber($("rulerBox"),$("paceRange"),16/320,v=>{pace=v;render();});
+
+// pace ruler
+function drawRuler(){
+  const W=320, p=16; let s="";
+  for(let i=0;i<=45;i++){
+    const x=p+(W-2*p)*i/45, major=i%5===0, h=major?22:12;
+    s+=`<line x1="${x}" y1="${34-h/2}" x2="${x}" y2="${34+h/2}" stroke="rgba(255,255,255,${major?.95:.5})" stroke-width="${major?2:1.2}" stroke-linecap="round"/>`;
+    if(major&&(i/5)%3===0)s+=`<text x="${x}" y="12" font-size="9" fill="#fff" text-anchor="middle" font-family="Manrope" font-weight="600">${fmtPace(270+i)}</text>`;
+  }
+  const x=p+(W-2*p)*(pace-270)/45;
+  s+=`<line x1="${x}" y1="18" x2="${x}" y2="52" stroke="#D7F26B" stroke-width="3" stroke-linecap="round"/><rect x="${x-9}" y="44" width="18" height="12" rx="6" fill="#D7F26B"/>`;
+  $("ruler").innerHTML=s;
+}
+const passRow=p=>`<li><span class="km dot">${fmtKm(p.km)}<small>km</small></span><span class="where">${p.where}</span><span class="t"><b class="dot">${clock(p.km,pace)}</b><s>${clock(p.km,pace+15)}</s></span></li>`;
+const mini=(s)=>{const [ax,ay]=posAt(s.from),[bx,by]=posAt(s.to);
+  return `<svg class="mini" viewBox="30 20 920 980" role="img" aria-label="Tronçon du km ${fmtKm(s.from)} au km ${fmtKm(s.to)} sur la carte"><path d="M-30.5,37.5 L61.0,46.9 L152.4,53.9 L289.5,75.0 L426.7,135.9 L559.2,185.1 L629.3,196.8 L678.1,203.9" fill="none" stroke="#2A4558" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"/><path d="M678.1,203.9 L708.6,241.4 L792.4,304.6 L883.8,386.6 L960.0,456.9" fill="none" stroke="#2A4558" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/><path d="M678.1,203.9 L731.4,206.2 L838.1,253.1 L929.5,332.7 L1005.7,398.4" fill="none" stroke="#2A4558" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/><path d="${FULL}" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="5" stroke-linejoin="round"/><path d="${pathBetween(s.from,s.to)}" fill="none" stroke="#D7F26B" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${ax}" cy="${ay}" r="22" fill="#0E0F10" stroke="#D7F26B" stroke-width="8"/><circle cx="${bx}" cy="${by}" r="22" fill="#D7F26B" stroke="#0E0F10" stroke-width="6"/></svg>`;};
+
+function render(){
+  $("paceOut").textContent=fmtPace(pace); $("paceRange").value=pace;
+  $("arriveOut").textContent=clock(TOTAL,pace)+" à "+clock(TOTAL,pace+15);
+  drawRuler();
+  $("hubList").innerHTML=HUB.map(passRow).join("");
+  $("nearList").innerHTML=NEAR.map(passRow).join("");
+  $("secondList").innerHTML=SECOND.map(passRow).join("");
+  const plan=[[0,"Départ","Cours Clémenceau, pied du pont Boieldieu"],[0.2,"Pont Boieldieu","Simon passe devant vous vers la rive droite"],[2.3,"Quai de la Bourse","traverser le pont, 2 min"],[3.7,"Quai de la Bourse","repasse devant vous, puis file sur le pont Corneille"],[15.9,"Avenue de Bretagne","9 min de marche, le temps d'un café avant"],[21.1,"Semi, pont Boieldieu","retour au point de base, 9 min"],[24.6,"Pont Corneille","250 m à l'est"],[36.5,"Avenue de Bretagne","le km 36 : encouragements utiles"],[TOTAL,"Arrivée","Cours Clémenceau, puis déjeuner"]];
+  $("plan").innerHTML=plan.map(p=>`<li><span class="t dot">${clock(p[0],pace)}</span><span>${p[1]}<span class="d">${p[2]}</span></span></li>`).join("");
+  $("segs").innerHTML=SEGS.map((s,i)=>`<button type="button" class="seg" data-i="${i}" aria-pressed="${i===active}">${mini(s)}<span>
+      <span class="name">${s.name}</span>
+      <span class="dist dot" style="display:block">${(s.to-s.from).toFixed(1).replace(".",",")}<small>km</small></span>
+      <span class="meta">Rejoindre au km ${fmtKm(s.from)} vers <b>${clock(s.from,pace)}</b>, retour vers <b>${clock(s.to,pace)}</b>. ${s.desc}.</span></span>
+    </button>`).join("");
+  $("thPace").textContent="à "+fmtPace(pace); $("thSlow").textContent="à "+fmtPace(pace+15);
+  const rows=[];for(let k=1;k<=42;k++)rows.push(k);rows.push(TOTAL);
+  $("kmTable").innerHTML=rows.map(k=>{
+    const isHub=HUB.some(h=>Math.abs(h.km-k)<0.5&&h.km>0), isSec=SECOND.some(h=>Math.abs(h.km-k)<0.5);
+    return `<tr class="${isHub?"hub":isSec?"second":""}"><td class="dot">${fmtKm(k)}</td><td>${kmLabel(k)}</td><td class="dot">${clock(k,pace)}</td><td class="dot">${clock(k,pace+15)}</td></tr>`;}).join("");
+  drawSeg(); updateCursor();
+}
+function drawSeg(){
+  const hl=$("seghl");
+  if(active<0){hl.setAttribute("opacity","0");return;}
+  hl.setAttribute("d",pathBetween(SEGS[active].from,SEGS[active].to)); hl.setAttribute("opacity",".95");
+}
+$("segs").addEventListener("click",e=>{
+  const b=e.target.closest(".seg");if(!b)return;
+  const i=+b.dataset.i;active=active===i?-1:i;
+  document.querySelectorAll(".seg").forEach(x=>x.setAttribute("aria-pressed",+x.dataset.i===active));
+  drawSeg();
+  if(active>=0){curKm=SEGS[active].from;$("kmRange").value=curKm;if(zoomed)setZoom(false);updateCursor();$("mapTile").scrollIntoView({behavior:"smooth",block:"start"});}
+});
+$("paceRange").addEventListener("input",e=>{pace=+e.target.value;render();});
+$("paceDown").addEventListener("click",()=>{pace=Math.max(270,pace-5);render();});
+$("paceUp").addEventListener("click",()=>{pace=Math.min(315,pace+5);render();});
+render();
+</script>
+</body>
+</html>

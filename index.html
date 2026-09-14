@@ -302,11 +302,10 @@ let kmHtml="";
 for(let k=2;k<42;k+=2){const [x,y]=posAt(k);kmHtml+=`<circle cx="${x}" cy="${y}" r="6" fill="var(--ink)"/><text x="${x+11}" y="${y+8}" font-size="22" font-weight="700" fill="var(--ink)" font-family="Manrope">${k}</text>`;}
 $("kms").innerHTML=kmHtml;
 (function(){
-  const [hx,hy]=[621.7,215.6],[cx,cy]=[672.0,206.2];
+  const [hx,hy]=[621.7,215.6];
   $("spots").innerHTML=
    `<circle cx="${hx}" cy="${hy}" r="44" fill="var(--pink)" opacity=".55" filter="url(#glow)"/>
     <circle cx="${hx}" cy="${hy}" r="15" fill="var(--pink)" stroke="#fff" stroke-width="4"/>
-    <circle cx="${cx}" cy="${cy}" r="10" fill="none" stroke="var(--pink)" stroke-width="4"/>
     <text x="${hx-90}" y="${hy+72}" font-size="30" fill="var(--pink)" font-weight="700" font-family="Manrope">point de base</text>`;
 })();
 

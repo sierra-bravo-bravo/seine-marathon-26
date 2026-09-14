@@ -297,7 +297,8 @@ const FULL=pathBetween(0,TOTAL);
 $("route").setAttribute("d",FULL);
 $("bridges").innerHTML=BRIDGES.map(b=>`<line x1="${b[1]}" y1="${b[2]-14}" x2="${b[1]}" y2="${b[2]+14}" stroke="#7F94A3" stroke-width="3" stroke-linecap="round"/><text x="${b[1]}" y="${b[2]+(b[3]<0?-26:40)}" font-size="15" fill="#7F94A3" font-family="Manrope" text-anchor="middle">${b[0]}</text>`).join("");
 let kmHtml="";
-for(let k=2;k<42;k+=2){const [x,y]=posAt(k);kmHtml+=`<circle cx="${x}" cy="${y}" r="6" fill="var(--ink)"/><text x="${x+11}" y="${y+8}" font-size="22" font-weight="700" fill="var(--ink)" font-family="Manrope">${k}</text>`;}
+// km 10 is skipped: the two Champ des Bruyères loops put it 18 units from km 32
+for(let k=2;k<42;k+=2){if(k===10)continue;const [x,y]=posAt(k);kmHtml+=`<circle cx="${x}" cy="${y}" r="6" fill="var(--ink)"/><text x="${x+11}" y="${y+8}" font-size="22" font-weight="700" fill="var(--ink)" font-family="Manrope">${k}</text>`;}
 $("kms").innerHTML=kmHtml;
 (function(){
   const [hx,hy]=[610.0,236.0];

@@ -19,7 +19,7 @@
   .icon.sm{width:1em;height:1em}
   html{-webkit-text-size-adjust:100%;background:var(--bg);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:"Manrope",system-ui,-apple-system,sans-serif;font-size:15.5px;line-height:1.45}
-  .wrap{max-width:560px;margin:0 auto;padding:calc(40px + env(safe-area-inset-top)) 14px calc(240px + env(safe-area-inset-bottom))}
+  .wrap{max-width:560px;margin:0 auto;padding:calc(40px + env(safe-area-inset-top)) 14px calc(40px + env(safe-area-inset-bottom))}
   .dot{font-family:"Doto","Manrope",monospace;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.02em}
 
   header{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:0 6px 24px}
@@ -31,7 +31,7 @@
   h1.brand img{width:100%;max-width:360px;height:auto;display:block;margin:0 auto}
   h1 span{display:block;color:var(--mute);font-size:16px;font-weight:500;letter-spacing:0;margin-top:10px;text-wrap:pretty}
   h1.brand span{margin-top:16px;line-height:1.4}
-  h1.sec{font-size:26px;margin:114px 6px 16px}
+  h1.sec{font-size:26px;margin:38px 6px 16px}
 
   .tile{position:relative;border-radius:var(--r);background:var(--tile);padding:20px 20px 18px;margin:24px 0;overflow:hidden;isolation:isolate}
   .glow{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.22)}
@@ -126,9 +126,8 @@
   tr.hub td:first-child{color:var(--pink)}
   .foot{margin:32px 8px 0;font-size:12.5px;color:var(--mute);text-wrap:pretty}
 
-  /* bottom scrubber */
-  .bar{position:fixed;left:0;right:0;bottom:0;padding:10px 14px calc(12px + env(safe-area-inset-bottom));background:rgba(255,255,255,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:5}
-  .bar .in{max-width:560px;margin:0 auto}
+  /* scrubber */
+  .bar{margin:12px 16px 16px;padding:12px 4px 4px;border-top:1px solid var(--line)}
   .bar .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:2px;flex-wrap:wrap}
   .bar .lbl{font-size:12px;color:var(--mute)}
   .bar .kmv{font-size:26px;line-height:1;color:var(--ink)}
@@ -164,7 +163,7 @@
   <span class="chip">Seine Marathon 76</span>
   <div class="when"><b><svg class="icon sm"><use href="#i-calendar"/></svg>Dimanche 27 septembre</b>Rouen, départ 8h30</div>
 </header>
-<h1 class="brand"><img src="title.png" alt="Écrire l'histoire, ensemble"><span>Le plan des supporters, et des amis qui courent un bout. Glissez la règle en bas d'écran pour faire avancer Simon sur la&nbsp;carte.</span></h1>
+<h1 class="brand"><img src="title.png" alt="Écrire l'histoire, ensemble"><span>Le plan des supporters, et des amis qui courent un bout. Glissez la règle sous la carte pour faire avancer Simon sur la&nbsp;carte.</span></h1>
 
 <section class="tile map" id="mapTile" aria-label="Carte">
   <div class="mapframe">
@@ -190,6 +189,19 @@
   </div>
   <div class="legend">
     <span><i class="w"></i>Seine</span><span><i></i>parcours</span><span><i class="c"></i>Simon</span><span><i class="h"></i>point de base</span>
+  </div>
+  <div class="bar" role="region" aria-label="Suivre Simon sur la carte">
+    <div class="in">
+      <div class="top">
+        <div><span class="lbl">Simon au</span> <span class="kmv dot" id="curKm">0,0<small>km</small></span></div>
+        <div class="tv dot" id="curT">8h30<small id="curT2">à l'allure choisie</small></div>
+      </div>
+      <div class="where" id="curWhere"></div>
+      <div class="scrub" id="scrubBox">
+        <input type="range" id="kmRange" min="0" max="42.195" step="0.1" value="0" aria-label="Position de Simon sur le parcours, en kilomètres">
+        <svg id="scrubSvg" viewBox="0 0 320 44" preserveAspectRatio="none" aria-hidden="true"></svg>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -241,20 +253,6 @@
 </section>
 
 <p class="foot"><svg class="icon sm"><use href="#i-info"/></svg>Distances calculées sur la trace GPX officielle (42,2 km), précision d'environ 100 m. Ajoutez 5 à 10 minutes de marge après le km 30 pour être sûrs d'être en&nbsp;place.</p>
-</div>
-
-<div class="bar" role="region" aria-label="Suivre Simon sur la carte">
-  <div class="in">
-    <div class="top">
-      <div><span class="lbl">Simon au</span> <span class="kmv dot" id="curKm">0,0<small>km</small></span></div>
-      <div class="tv dot" id="curT">8h30<small id="curT2">à l'allure choisie</small></div>
-    </div>
-    <div class="where" id="curWhere"></div>
-    <div class="scrub" id="scrubBox">
-      <input type="range" id="kmRange" min="0" max="42.195" step="0.1" value="0" aria-label="Position de Simon sur le parcours, en kilomètres">
-      <svg id="scrubSvg" viewBox="0 0 320 44" preserveAspectRatio="none" aria-hidden="true"></svg>
-    </div>
-  </div>
 </div>
 
 <script>
